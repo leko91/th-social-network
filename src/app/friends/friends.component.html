@@ -1,0 +1,21 @@
+<span class="details" (click)="friendsLoaded || getFriends()">Details</span>
+
+<div class="friends" *ngIf="friends.length > 0">
+    <div>
+        <span class="friends-title">Friends:</span>
+
+        <span *ngFor="let friend of friends; last as isLast">
+            {{ people[friend - 1].firstName }}
+            {{ people[friend - 1].surname !== '' ? people[friend - 1].surname : 'Doe' }}{{ isLast ? '' : ', ' }}
+        </span>
+    </div>
+
+    <div *ngIf="suggestedFriendsUnique.length > 0">
+        <span class="friends-title">Suggested friends:</span>
+
+        <span *ngFor="let friend of suggestedFriendsUnique; last as isLast">
+            {{ people[friend - 1].firstName }}
+            {{ people[friend - 1].surname !== '' ? people[friend - 1].surname : 'Doe' }}{{ isLast ? '' : ', ' }}
+        </span>
+    </div>
+</div>

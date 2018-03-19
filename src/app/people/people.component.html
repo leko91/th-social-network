@@ -1,0 +1,9 @@
+<article class="personWrapper" *ngFor="let person of people">
+    <div class="person" [ngClass]="{'person--female': person.gender === 'female'}">
+        <span class="person-name">{{ person.firstName }} {{ person.surname !== '' ? person.surname : 'Doe' }}</span>
+
+        <span class="person-age">Age: {{ person.age > 0 ? person.age : 'N/A' }}</span>
+
+        <app-friends [person]="person"></app-friends>
+    </div>
+</article>

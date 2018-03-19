@@ -1,0 +1,30 @@
+.details {
+  position: relative;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  &::after {
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+
+    width: 100%;
+    height: 1px;
+
+    content: "";
+
+    background-color: #fff;
+  }
+}
+
+.friends {
+  cursor: pointer;
+}
+
+.friends-title {
+  display: block;
+
+  margin: 10px 0 0;
+}
