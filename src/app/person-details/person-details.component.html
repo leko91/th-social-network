@@ -6,19 +6,22 @@
         <div>
             <span class="friends-title">Friends:</span>
 
-            <ul class="friends-list" *ngFor="let friend of friends; last as isLast">
-                <li class="friends-listItem">{{ people[friend - 1].firstName }} {{ people[friend - 1].surname !== '' ? people[friend - 1].surname : 'Doe' }}{{ isLast ? '' : ', ' }}</li>
+            <ul class="friends-list">
+                <li class="friends-listItem"  *ngFor="let friend of friends;last as isLast">{{ people[friend - 1].firstName }} {{ people[friend - 1].surname !== '' ? people[friend - 1].surname : 'Doe' }}{{ isLast ? '' : ', ' }}</li>
             </ul>
         </div>
 
         <div>
-            <span *ngFor="let friend of suggestedFriendsUnique;first as isFirst;last as isLast">
-                <span class="friends-title" *ngIf="isFirst">Suggested friends:</span>
+            <span class="friends-title">Suggested friends:</span>
 
-                <ul class="friends-list" *ngIf="friend !== person.id">
-                    <li class="friends-listItem">{{ people[friend - 1].firstName }} {{ people[friend - 1].surname !== '' ? people[friend - 1].surname : 'Doe' }}{{ isLast ? '' : ', ' }}</li>
-                </ul>
-            </span>
+            <ul class="friends-list">
+                <ng-container class="friends-listItem" *ngFor="let friend of suggestedFriendsUnique;last as isLast">
+                    <li class="friends-listItem" *ngIf="friend !== person.id && !friends.includes(friend)">
+                        {{ people[friend - 1].firstName }} {{ people[friend - 1].surname !== '' ? people[friend - 1].surname : 'Doe' }}{{ isLast ? '' : ', ' }}
+                    </li>
+
+                </ng-container>
+            </ul>
         </div>
     </div>
 </div>
