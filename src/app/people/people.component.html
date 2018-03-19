@@ -4,6 +4,6 @@
 
         <span class="person-age">Age: {{ person.age > 0 ? person.age : 'N/A' }}</span>
 
-        <app-friends [person]="person"></app-friends>
+        <a class="details" routerLink="/detail/{{ person.id }}">Details</a>
     </div>
 </article>

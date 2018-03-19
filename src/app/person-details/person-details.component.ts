@@ -1,33 +1,49 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { DataService } from '../data.service';
 import { Person } from '../person';
 
-@Component({
-  selector: 'app-friends',
-  templateUrl: './friends.component.html',
-  styleUrls: ['./friends.component.scss']
-})
-export class FriendsComponent implements OnInit {
-  @Input() person;
 
+@Component({
+  selector: 'app-person-details',
+  templateUrl: './person-details.component.html',
+  styleUrls: ['./person-details.component.scss']
+})
+export class PersonDetailsComponent implements OnInit {
   public people: Person[];
+  public person: Person;
+
   public friends = [];
   public friendsOfFriends = [];
   public friendsOfFriendsUnique = [];
   public suggestedFriends = [];
   public suggestedFriendsUnique = [];
-  public friendsLoaded: boolean = false;
 
-  constructor(private dataService: DataService) {}
+  public personLoaded: boolean = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private dataService: DataService,
+    private location: Location
+  ) {}
 
   ngOnInit () {
-    this.getPeople();
+    this.getPerson();
   }
 
-  getPeople () {
+  getPerson() {
+    const id = +this.route.snapshot.paramMap.get('id');
+
     this.dataService.getData().subscribe(people => {
       this.people = people;
+
+      this.person = people[id - 1];
+
+      this.getFriends();
+
+      this.personLoaded = true;
     });
   }
 
@@ -46,8 +62,10 @@ export class FriendsComponent implements OnInit {
     this.suggestedFriends = this.findDuplicatesInArray(this.friendsOfFriends);
 
     this.suggestedFriendsUnique = this.removeDuplicatesFromArray(this.suggestedFriends);
+  }
 
-    this.friendsLoaded = true;
+  goBack() {
+    this.location.back();
   }
 
   // Helper functions

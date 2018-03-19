@@ -5,13 +5,13 @@ $femaleColor: #ff69b4;
   display: inline-block;
 
   width: 20%;
-  
+
   vertical-align: top;
 }
 
 .person {
-  padding: 10px;
-  margin: 0 10px 20px;
+  padding: 15px;
+  margin: 0 15px 15px;
 
   text-align: center;
 
@@ -39,4 +39,27 @@ $femaleColor: #ff69b4;
   margin: 0 0 5px;
 
   font-size: 18px;
+}
+
+.details {
+  position: relative;
+
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  &::after {
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+
+    width: 100%;
+    height: 1px;
+
+    content: "";
+
+    background-color: #fff;
+  }
 }

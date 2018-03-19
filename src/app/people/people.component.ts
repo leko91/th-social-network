@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Person } from '../person';
 
+
 @Component({
   selector: 'app-people',
   templateUrl: './people.component.html',

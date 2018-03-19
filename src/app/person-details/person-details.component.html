@@ -1,0 +1,26 @@
+<div class="personDetails" *ngIf="personLoaded" [ngClass]="{'personDetails--female': person.gender === 'female'}">
+    <span class="personDetails-name">{{ person.firstName }} {{ person.surname }}</span>
+    <span class="personDetails-age">Age: {{ person.age }}</span>
+
+    <div class="friends" *ngIf="!friendsLoaded || friends.length > 0">
+        <div>
+            <span class="friends-title">Friends:</span>
+
+            <ul class="friends-list" *ngFor="let friend of friends; last as isLast">
+                <li class="friends-listItem">{{ people[friend - 1].firstName }} {{ people[friend - 1].surname !== '' ? people[friend - 1].surname : 'Doe' }}{{ isLast ? '' : ', ' }}</li>
+            </ul>
+        </div>
+
+        <div>
+            <span *ngFor="let friend of suggestedFriendsUnique;first as isFirst;last as isLast">
+                <span class="friends-title" *ngIf="isFirst">Suggested friends:</span>
+
+                <ul class="friends-list" *ngIf="friend !== person.id">
+                    <li class="friends-listItem">{{ people[friend - 1].firstName }} {{ people[friend - 1].surname !== '' ? people[friend - 1].surname : 'Doe' }}{{ isLast ? '' : ', ' }}</li>
+                </ul>
+            </span>
+        </div>
+    </div>
+</div>
+
+<button class="backButton" (click)="goBack()">Go back</button>
