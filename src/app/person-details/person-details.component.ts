@@ -15,11 +15,11 @@ export class PersonDetailsComponent implements OnInit {
   public people: Person[];
   public person: Person;
 
-  public friends = [];
+  public friends: number[] = [];
   public friendsOfFriends = [];
-  public friendsOfFriendsUnique = [];
-  public suggestedFriends = [];
-  public suggestedFriendsUnique = [];
+  public friendsOfFriendsUnique: number[] = [];
+  public suggestedFriends: number[] = [];
+  public suggestedFriendsUnique: number[] = [];
 
   public personLoaded: boolean = false;
 
@@ -34,7 +34,7 @@ export class PersonDetailsComponent implements OnInit {
   }
 
   getPerson() {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id: number = +this.route.snapshot.paramMap.get('id');
 
     this.dataService.getData().subscribe(people => {
       this.people = people;
@@ -42,23 +42,26 @@ export class PersonDetailsComponent implements OnInit {
       this.person = people[id - 1];
 
       this.getFriends();
+      this.getFriendsOfFriends();
+      this.getSugestedFriends();
 
       this.personLoaded = true;
     });
   }
 
   getFriends () {
-    // All friends
     this.friends = this.person.friends;
+  }
 
-    // Friends of friends
+  getFriendsOfFriends () {
     this.friends.forEach(friendOfFriend => this.friendsOfFriends.push(this.people[friendOfFriend - 1].friends));
 
     this.friendsOfFriends = [].concat.apply([], this.friendsOfFriends);
 
     this.friendsOfFriendsUnique = this.removeDuplicatesFromArray(this.friendsOfFriends);
+  }
 
-    // Suggested friends
+  getSugestedFriends () {
     this.suggestedFriends = this.findDuplicatesInArray(this.friendsOfFriends);
 
     this.suggestedFriendsUnique = this.removeDuplicatesFromArray(this.suggestedFriends);
@@ -68,7 +71,7 @@ export class PersonDetailsComponent implements OnInit {
     this.location.back();
   }
 
-  // Helper functions
+  // Array helper functions
   findDuplicatesInArray (inputArray) {
     return inputArray.filter((item, position) => inputArray.indexOf(item) !== position);
   }
