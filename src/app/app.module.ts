@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { DataService } from './data.service';
 import { PeopleComponent } from './people/people.component';
 import { FriendsComponent } from './friends/friends.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FriendsComponent } from './friends/friends.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [
     DataService,
